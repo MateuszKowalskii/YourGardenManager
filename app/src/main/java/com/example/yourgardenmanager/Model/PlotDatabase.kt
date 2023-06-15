@@ -12,6 +12,7 @@ import androidx.room.RoomDatabase
 abstract class PlotDatabase: RoomDatabase() {
     //function to return Dao
     abstract fun plotsDao(): PlotDao
+
     //singleton pattern used here
     companion object {
         private var instance: PlotDatabase? = null

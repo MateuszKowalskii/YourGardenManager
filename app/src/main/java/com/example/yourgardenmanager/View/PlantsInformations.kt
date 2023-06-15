@@ -1,5 +1,6 @@
 package com.example.yourgardenmanager.View
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -44,6 +45,7 @@ class PlantsInformations : AppCompatActivity() {
             .build()
 
         client.newCall(request).enqueue(object : Callback {
+            @SuppressLint("SetTextI18n")
             override fun onResponse(call: Call, response: Response) {
                 val responseData = response.body()?.string()
                 try {
@@ -54,13 +56,13 @@ class PlantsInformations : AppCompatActivity() {
                     val scientificName = plantsArray.getJSONObject(0).getString("scientific_name")
                     val commonName = plantsArray.getJSONObject(0).getString("common_name")
                     val scientificFamilyName = plantsArray.getJSONObject(0).getString("family")
-                    var family_common_name = plantsArray.getJSONObject(0).getString("family_common_name")
+                    var familyCommonName = plantsArray.getJSONObject(0).getString("family_common_name")
 
-                    if(family_common_name == "null")family_common_name = "No Common Name"
+                    if(familyCommonName == "null")familyCommonName = "No Common Name"
 
                     runOnUiThread {
                         val plantInfo = "Scientific Name: $scientificName\nCommon Name: $commonName\n" +
-                                "Scientific Family Name: $scientificFamilyName\nFamily Common Name: $family_common_name"
+                                "Scientific Family Name: $scientificFamilyName\nFamily Common Name: $familyCommonName"
                         val textView = findViewById<TextView>(R.id.textView)
                         textView.text = plantInfo
                     }

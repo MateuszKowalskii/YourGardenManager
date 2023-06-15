@@ -22,7 +22,6 @@ class PlotsAdapter(
 
     class PlotViewHolder(itemView: View, listener: onItemClickListener) : RecyclerView.ViewHolder(itemView){
 
-        //changed ta klasa nie miała ciała - bez{}
         init{
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)

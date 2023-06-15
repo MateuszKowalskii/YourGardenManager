@@ -49,35 +49,7 @@ class PlotsList : AppCompatActivity() {
             .getInstance(application)
             .create(PlotViewModel::class.java)
 
-        //In case of receiving any messages
-        val messageActionType = intent.getStringExtra("TYPE")
-        val messagePlotName = intent.getStringExtra("NAME")
-        val messagePlotPlantType = intent.getStringExtra("PLANT")
-        val messagePlotArea : Double = intent.getDoubleExtra("AREA",0.0)
 
-        if(messagePlotName != null && messagePlotPlantType != null && messagePlotArea != -10.0){
-            if(messageActionType == "add"){
-                val plot = Plot(0,messagePlotName,messagePlotPlantType,messagePlotArea)
-                Toast.makeText(this@PlotsList,"Added plot "+ messagePlotName, Toast.LENGTH_SHORT).show()
-                viewModel.insertPlot(plot)
-                plotsAdapter.addPlot(plot)
-            }
-            else if(messageActionType == "edit"){
-                val messagePlotId = intent.getIntExtra("ID",0)
-                Toast.makeText(this@PlotsList,"Edited plot "+ messagePlotName, Toast.LENGTH_SHORT).show()
-                val plot = Plot(messagePlotId,messagePlotName,messagePlotPlantType,messagePlotArea)
-                viewModel.updatePlot(plot)
-            }
-            else if(messageActionType == "delete"){
-
-                val messagePlotId = intent.getIntExtra("ID",0)
-
-                Toast.makeText(this@PlotsList,"Deleted plot"+ plotsAdapter.itemCount, Toast.LENGTH_SHORT).show()
-                val plot = Plot(messagePlotId,messagePlotName,messagePlotPlantType,messagePlotArea)
-                plotsAdapter.deletePlot(plot)
-                viewModel.deletePlot(plot)
-            }
-        }
 
 
         val plotsList = findViewById<RecyclerView>(R.id.plotsList)
@@ -113,6 +85,35 @@ class PlotsList : AppCompatActivity() {
             }
         })
 
+        //In case of receiving any messages
+        val messageActionType = intent.getStringExtra("TYPE")
+        val messagePlotName = intent.getStringExtra("NAME")
+        val messagePlotPlantType = intent.getStringExtra("PLANT")
+        val messagePlotArea : Double = intent.getDoubleExtra("AREA",0.0)
+
+        if(messagePlotName != null && messagePlotPlantType != null && messagePlotArea != -10.0){
+            if(messageActionType == "add"){
+                val plot = Plot(0,messagePlotName,messagePlotPlantType,messagePlotArea)
+                Toast.makeText(this@PlotsList,"Added plot "+ messagePlotName, Toast.LENGTH_SHORT).show()
+                viewModel.insertPlot(plot)
+                plotsAdapter.addPlot(plot)
+            }
+            else if(messageActionType == "edit"){
+                val messagePlotId = intent.getIntExtra("ID",0)
+                Toast.makeText(this@PlotsList,"Edited plot "+ messagePlotName, Toast.LENGTH_SHORT).show()
+                val plot = Plot(messagePlotId,messagePlotName,messagePlotPlantType,messagePlotArea)
+                viewModel.updatePlot(plot)
+            }
+            else if(messageActionType == "delete"){
+
+                val messagePlotId = intent.getIntExtra("ID",0)
+
+                Toast.makeText(this@PlotsList,"Deleted plot"+ plotsAdapter.itemCount, Toast.LENGTH_SHORT).show()
+                val plot = Plot(messagePlotId,messagePlotName,messagePlotPlantType,messagePlotArea)
+                plotsAdapter.deletePlot(plot)
+                viewModel.deletePlot(plot)
+            }
+        }
 
         val addPlotButton = findViewById<Button>(R.id.addPlotButton)
         addPlotButton.setOnClickListener{

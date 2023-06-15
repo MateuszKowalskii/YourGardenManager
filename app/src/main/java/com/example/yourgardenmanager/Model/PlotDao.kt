@@ -2,7 +2,6 @@ package com.example.yourgardenmanager
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-//import kotlinx.coroutines.flow.Flow
 
 //Data access object interface dedicated to work with Plot objects
 
